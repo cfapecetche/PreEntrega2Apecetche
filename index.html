@@ -2,17 +2,199 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>1er Entrega Carlos Federico Apecetche</title>
+
+    <!-- Descripción -->
+    <meta name="description" content="Bienvenidos al sitio de basura diferenciada, en esta seccion encontraras la forma de contactarnos para formar parte de los grupos del colectivo ambiental y formar parte del recorrido en tu zona.">
+
+    <!-- Palabras clave -->
+    <meta name="keywords" content="contacto, ambiente, recoleccion, zona sur, diferenciada, reciclado, basura, recorrido">
+           
+    
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;200;500;600;700&display=swap"
+		rel="stylesheet">
+
+     <!--Agrego el link al CSS de Bootstrap-->
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    
+
+    <!-- linkear nuestro css -->
+	<link rel="stylesheet" href="./css/styles.css">
+    <!--Agrego el favicon-->
+    <link rel="icon" type="image/x-icon" href="./image/logo_cooperativa-modified.JPG">
+    
+    <title>Recorrido - Busura Diferenciada</title>
+    
 </head>
+   
 <body>
+
+<!-- </header> -->
+
+<header class="cabecera">
+
+    <!--Menu de navegacion hamburguesa Bootstrap-->
+      <nav class="navbar navbar-expand-lg">
+          <div class="container-fluid">
+
+                        
+            <a class="navbar-brand" href="./index.html">
+              <!--logo-->
+              <img src="./image/logo_cooperativa-modified.JPG" alt="logo cooperativa"></a>
+
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link" aria-current="page" href="../index.html">Inicio</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="como_reciclar.html">Reciclando</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="recorrido.html">Recorrido</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="nosotros.html">Nosotros</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" href="contacto.html">Contacto</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+  </header>
+
+<main>
+    <h1>Recorrido-Basura diferenciada</h1> 
+<section  class="fondo">
+
+    <section>
+        
+      <form id="vecino">
+        <div>         
+               <div class="col-auto">
+                    <label for="nombre">Nombre</label>
+                </div>
+                <div class="col-auto">    
+                    <input class="form-control" size=40 type="text" id="nombre" required>
+                </div>
+        </div>
+        <div>  
+                <div class="col-auto">
+                    <label for="apellido">Apellido</label>
+                </div>
+                <div class="col-auto">    
+                    <input class="form-control" size=40 type="text" id="apellido" required>
+                </div>
+        </div>
+        <div>
+                <div class="col-auto">
+                    <label for="orden">Orden</label>
+                </div>
+                 <div class="col-auto">    
+                    <input class="form-control" size=10 type="number" id="orden" required>        
+                </div>
+        </div>    
+
+                <div class="col-auto">
+                    <label for="dia">Dia del recorrido</label>
+                </div>
+                <div class="col-auto">
+                  <select name="dia" id="dia">
+                    <option value="LUNES">LUNES</option>
+                    <option value="MARTES">MARTES</option>
+                    <option value="MIERCOLES">MIERCOLES</option>
+                    <option value="JUEVES">JUEVES</option>
+                    <option value="VIERNES">VIERNES</option>
+                    <option value="SABADO">SABADO</option>
+                    <option value="DOMINGO">DOMINGO</option>
+                  </select>
+               
+                </div>
+                
+
+
+
+                <div class="col-auto">  
+                   <input class="form-control" size=10 type="submit" id="cargar" name="cargar" value="Cargar datos y calcular recorrido" > 
+                         
+                
+        
+        <div>
+          
+        </div> 
+        <br>
+        
+        
+        
+    </form>
+
+      
+
+    </section>
+   
+    <div class="vs">
+      <ul id="list">Recorridos</ul>
+    </div>    
+    
+    
+
+
+
+</main>
+
+
+
+<footer class="mt-5">
+    
+
+    <div class="d-flex justify-content-center pie">
+     
+   
+      <!--Enlace fb-->
+      <a href="https://www.facebook.com/profile.php?id=100079611353120" target="_blank">
+        <span class="iconify" data-icon="mdi:facebook"></span>
+      </a>
+      
+       <!--Enlace ig-->
+      <a href="https://www.instagram.com/explore/tags/poloreciclador/" target="_blank">
+          <span class="iconify" data-icon="mdi:instagram"></span>
+      </a>
+      <!--Enlace WS-->
+      <a href="https://wa.me/54900000" target="_blank">
+        <span class="iconify" data-icon="mdi:whatsapp"></span>
+      </a>
+  
+    </div>
+
+      <div class="d-flex justify-content-center">
+      
+      <p>&copy 2023 Apecetche </p>
+
+      </div>
+
+    
+</footer>
+
+<!-- script iconify -->
+<script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+ 
+
+<!--Agrego el link al script de Bootstrap-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+
 
 
     
     <script src="./index.js"></script>
 </body>
-
-     
-</footer>
-
 </html>

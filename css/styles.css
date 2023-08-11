@@ -1,0 +1,194 @@
+@charset "UTF-8";
+/*Paleta de colores*/
+/*Tamaños de fuentes e iconos*/
+/*Resoluciones de pantallas*/
+/*Separaciones (margenes y paddings)*/
+/*Fuente*/
+/*MIXINS*/
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Josefin Sans";
+}
+
+h1 {
+  text-align: left;
+  margin-left: 20px;
+  animation-duration: 3s;
+  animation-name: aparecer;
+  animation-iteration-count: infinite;
+}
+
+@keyframes aparecer {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+img {
+  max-width: 100%;
+}
+
+.cabecera {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: white;
+  width: 100%;
+}
+
+.cabecera img {
+  padding: 10px;
+  width: 100px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+.nav-link,
+.navbar-nav .nav-link.active {
+  color: #595959;
+}
+.nav-link:hover,
+.navbar-nav .nav-link.active:hover {
+  color: #a5a5a5;
+}
+
+.fondo {
+  background-image: url("../image/texture-7515225_1280.jpg");
+  height: 600px;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 10px 10px;
+  margin-bottom: 10px;
+}
+
+.vs {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.p_blanco {
+  color: white;
+}
+
+.cpy {
+  position: relative;
+  width: 150px;
+  bottom: 40px;
+  left: 300px;
+}
+
+/*BARRA PROGRESO*/
+.barra-progreso {
+  margin-left: 20px;
+  width: 60%;
+  border: solid 2px;
+  height: 15px;
+}
+
+.barra-rellena {
+  border: solid 1px;
+  height: 11px;
+  width: 50%;
+  background-color: #7f7f7f;
+  animation: rellenando 2s;
+}
+
+@keyframes rellenando {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 20%;
+  }
+}
+.video {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+iframe {
+  width: 740px;
+  height: 210px;
+}
+
+.contacto {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.carousel-control-prev-icon {
+  background-color: black;
+}
+
+.carousel-control-next-icon {
+  background-color: black;
+}
+
+.carousel-item img {
+  height: 40vh;
+}
+
+.card img {
+  height: 35vh;
+}
+
+@media (min-width: 768px) {
+  #nosotros {
+    margin: 50px auto;
+    height: 350px;
+  }
+}
+@media (min-width: 992px) {
+  .carousel-item img {
+    max-width: 60%;
+    margin: 0 auto;
+    height: 60vh;
+  }
+  #iframe1 {
+    width: 800px;
+    height: 430px;
+  }
+  #vecino {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  grid-template-rows: 100px auto 100px;
+  gap: 10px;
+  padding: auto;
+  }
+  
+}
+@media (min-width: 1200px) {
+  .carousel-item img {
+    max-width: 60%;
+    margin: 0 auto;
+    height: 70vh;
+  }
+  #iframe1 {
+    width: 800px;
+    height: 450px;
+  }
+  #recorrido {
+    max-width: 45%;
+    margin: 10px auto;
+    height: 55vh;
+  }
+}
+
+/*# sourceMappingURL=styles.css.map */

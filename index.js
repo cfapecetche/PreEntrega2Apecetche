@@ -7,7 +7,11 @@
 se agrega array de objetos, donde se almacenan los datos ingresados, luego se ordenan y se ejecutan los metodos
 por ultimo se realiza una busqueda de los vecinos que figuran en determinado dia */
 
-
+/* Entrega 3° - JSON - Storage - DOM - Eventos
+Capturo el evento submit, leo desde el DOM el contenido de los campos, instancio el objeto y Cargo en un array de objetos los datos de los vecinos, ejecuto los eventos y
+ muestro el resultado en en DOM.Guardo en formato JSON ese array de objetos en el localStorage
+Cuando cargo la pagina leo el contenido del localStorage, convierdo el objeto a un array de objetos, lo recorro luego lo leo desde el local storage, paso nuevamente a un array de objetos, lo recorro,
+ejecuto los metodos y nuevamente modifico el dom con los resultados.*/
 
 
 class recorrido {
@@ -95,67 +99,90 @@ class recorrido {
 
     
     }
-const recorridos = [];
+let nombre;
+let apellido;
+let orden;
+let dia;
+let lista;
+   
+let recorridos = [];
+
+let form = document.getElementById("vecino");
+
+  form.addEventListener("submit", (e) => {
+      localStorage.clear();
+      e.preventDefault();
+      nombre = document.getElementById("nombre").value;
+      apellido = document.getElementById("apellido").value;
+      orden = document.getElementById("orden").value;
+      dia = document.getElementById("dia").value;
+      lista = document.getElementById("list");
+
+      cargar_recorrido();
+      
+     
+     
+      
+    });
 
 function cargar_recorrido(){
-       
-    let continuar = prompt("Ingrese SI, si desea cargar datos o NO para salir");
 
-    continuar = continuar.toUpperCase();
-    
-    while(continuar !== "NO"){  
-          let nombre = prompt("Ingrese su nombre");
-          let apellido = prompt("Ingrese su apellido");
-          let dia = prompt("Ingrese el dia de la semana de su recorrido");
-          let orden = prompt("Ingrese su numero de orden");
-          recorridos.push(new recorrido(nombre, apellido, orden, dia));          
-          continuar = prompt("Ingrese SI, si desea cargar datos o NO para salir");
-          continuar = continuar.toUpperCase();
-          
+    recorridos.push(new recorrido(nombre, apellido, orden, dia));    
+    document.getElementById("nombre").value = "";
+    document.getElementById("apellido").value = "";
+    document.getElementById("orden").value = "";
+    mostrar_recorridos();         
+}
 
-    }
- }
+ function eliminar_recorrido(index) {
+    recorridos.splice(index, 1);
+    mostrar_recorridos();
+  }
 
-
-function ordena(){
+  function ordena(){
     
     recorridos.sort(((a, b) => a.orden - b.orden));
   }
+  
+  function mostrar_recorridos() {
+    !recorridos.length
+      ? (lista.innerHTML = "<li>No hay recorridos</li>")
+      : (lista.innerHTML = "");
+    ordena();  
+    recorridos.forEach((recorridos, index) => {
+     
+        const tiempo = recorridos.calcular_tiempo();
+        const barrio = recorridos.calcular_barrio(); 
 
-function genera_resultados(){
+      lista.innerHTML += `
+        <li>
+          <span>${recorridos.nombre + ", " + recorridos.apellido + " tiene recolección el día " + recorridos.dia + " a las "+ tiempo + " en el barrio " + barrio}</span>
+          <button class="delete" onclick="eliminar_recorrido(${index})">Eliminar</button>
+        </li>
+      `;
+    });
 
-    ordena();
+    localStorage.setItem("recorrido", JSON.stringify(recorridos));
+  }
+  
+document.addEventListener("DOMContentLoaded", leer_storage);
+ 
 
-    for (const rec of recorridos)
-          {
-         const tiempo = rec.calcular_tiempo();
-         const barrio = rec.calcular_barrio();
-    
-    alert( "Hola " + rec.nombre + ", " + rec.apellido + " tiene recoleccion el dia " + rec.dia + " a las "+ tiempo + " en el barrio " + barrio );
-         }
+function leer_storage() {
+
+    recorridos.length = 0;
+    lista = document.getElementById("list");
+
+    const almacenados = JSON.parse(localStorage.getItem("recorrido"));
+ 
+    for (const objeto of almacenados)
+ 
+    recorridos.push(new recorrido(objeto.nombre, objeto.apellido, objeto.orden, objeto.dia));
+
+    mostrar_recorridos();
+  
+ 
 }
 
 
-
-function busquedaXdia()
-       {
-                 
-        let dia = prompt("Ingrese el dia a buscar");
-        dia = dia.toUpperCase();
-        
-        const resultado = recorridos.filter((el) => el.dia.includes(dia));
-
-        for (const res of resultado){
-           
-            alert ("Resultado de busqueda por día: " + dia + " - " + res.nombre + ", " + res.apellido + " tiene recoleccion el dia " + res.dia )
-
-        }
-     }
-
-
-
-cargar_recorrido();
-
-genera_resultados();
-
-busquedaXdia();
+ 
