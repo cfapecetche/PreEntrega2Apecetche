@@ -10,10 +10,14 @@ por ultimo se realiza una busqueda de los vecinos que figuran en determinado dia
 /* Entrega 3° - JSON - Storage - DOM - Eventos
 Capturo el evento submit, leo desde el DOM el contenido de los campos, instancio el objeto y Cargo en un array de objetos los datos de los vecinos, ejecuto los eventos y
  muestro el resultado en en DOM.Guardo en formato JSON ese array de objetos en el localStorage
-Cuando cargo la pagina leo el contenido del localStorage, convierdo el objeto a un array de objetos, lo recorro luego lo leo desde el local storage, paso nuevamente a un array de objetos, lo recorro,
-ejecuto los metodos y nuevamente modifico el dom con los resultados.*/
+Cuando cargo la pagina leo el contenido del localStorage, convierto el objeto a un array de objetos, lo recorro luego lo leo desde el local storage, paso nuevamente a un array de objetos, lo recorro,
+ejecuto los metodos y modifico el dom con los resultados.*/
 
+/*Entrega final-
+Se agrega una libreria Swett Alert para mensaje de eliminacion con promise para confirmar. Se consume una api de clima api.openweathermap.org, se captura el json y se graba en variables 
+cada valor en funcion de la cuidad pasada por parametro y te devuelve el clima. Se usa la libreria Toastify para mostrar el clima de cada recorrido agregado.
 
+*/ 
 class recorrido {
        constructor(nombre, apellido, orden, dia) {
         this.nombre = nombre.toUpperCase();
@@ -82,7 +86,7 @@ class recorrido {
                 this.barrio = "BURZACO";
                 break;
             case "JUEVES":
-                this.barrio = "ADROGUE";
+                this.barrio = "RAFAEL CALZADA";
                 break;
             case "VIERNES":
                 this.barrio = "JOSE MARMOL"
@@ -99,13 +103,27 @@ class recorrido {
 
     
     }
+
+// declaracion de variables globales
+
 let nombre;
 let apellido;
 let orden;
 let dia;
 let lista;
-   
+let index;
+const apikey ="01da2d50b3438933a21f6da48566f132";
+const apiurl ="https://api.openweathermap.org/data/2.5/weather?units=metric";
+let barrio;
+let ciudad_cl;
+let temp;
+let humedad;
+let viento;
 let recorridos = [];
+
+
+
+// Captura de datos del dom y ejecucion de funciones principales
 
 let form = document.getElementById("vecino");
 
@@ -117,26 +135,29 @@ let form = document.getElementById("vecino");
       orden = document.getElementById("orden").value;
       dia = document.getElementById("dia").value;
       lista = document.getElementById("list");
-
       cargar_recorrido();
+      mostrar_recorridos();
+      clima(barrio);
       
-     
-     
-      
+                
     });
 
-function cargar_recorrido(){
+    
+ 
 
+function cargar_recorrido(){
+      
     recorridos.push(new recorrido(nombre, apellido, orden, dia));    
     document.getElementById("nombre").value = "";
     document.getElementById("apellido").value = "";
     document.getElementById("orden").value = "";
-    mostrar_recorridos();         
+    
+            
 }
 
  function eliminar_recorrido(index) {
-    recorridos.splice(index, 1);
-    mostrar_recorridos();
+           showSalert(); 
+       
   }
 
   function ordena(){
@@ -144,7 +165,7 @@ function cargar_recorrido(){
     recorridos.sort(((a, b) => a.orden - b.orden));
   }
   
-  function mostrar_recorridos() {
+function mostrar_recorridos() {
     !recorridos.length
       ? (lista.innerHTML = "<li>No hay recorridos</li>")
       : (lista.innerHTML = "");
@@ -152,7 +173,8 @@ function cargar_recorrido(){
     recorridos.forEach((recorridos, index) => {
      
         const tiempo = recorridos.calcular_tiempo();
-        const barrio = recorridos.calcular_barrio(); 
+        barrio = recorridos.calcular_barrio(); 
+        
 
       lista.innerHTML += `
         <li>
@@ -184,5 +206,54 @@ function leer_storage() {
  
 }
 
+function showSalert() {
+  swal({
+    title: "Desea eliminar el recorrido?",
+    icon: "warning",
+    buttons: true,
+    dangerMode: true,
+  })
+  .then((borrando) => {
+    borrando 
+    ? (recorridos.splice(index, 1), 
+    swal("El recorrido fue eliminado con exito", 
+    {icon: "success", }),   
+    mostrar_recorridos())
+    : (swal("El recorrido no fue eliminado"))
+  });
+}
+
+
+
+async function clima(ciudad){
+     const response = await fetch (apiurl+ `&q=`+ ciudad + `&appid=${apikey}`);
+     let data = await response.json();
+    console.log(data);
+    ciudad_cl = data.name;
+    temp = Math.round(data.main.temp) +" °C";
+    humedad = data.main.humidity + " %";
+    viento = data.wind.speed + "km/h";
+
+    showclima();
+
+ }
 
  
+
+ function showclima() {
+  Toastify({
+    text: "El clima en tu barrio : " + ciudad_cl + "- Temp: " + temp + "- Humedad: " + humedad + "- Viento: " + viento,
+    duration: 3000,
+    newWindow: true,
+    close: true,
+    gravity: "top", 
+    position: "right", 
+    stopOnFocus: true, 
+    style: {
+      background: "linear-gradient(to right, #1c1f1f, #777975)",
+    },
+    
+  }).showToast();
+}
+
+    
